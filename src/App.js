@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ZipField from './components/ZipField'
+import ZipField from './components/ZipField';
 
 class App extends Component {
   render() {
