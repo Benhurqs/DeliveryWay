@@ -4,7 +4,12 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import InputMask from 'react-input-mask'
 import RaisedButton from 'material-ui/RaisedButton';
 
-export default class ZipField extends React.Component {
+
+import {connect} from 'react-redux'
+import getDistance from '../store/googlemaps/actions/action_get_distance'
+import {bindActionCreators} from 'redux'
+
+class ZipField extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,11 +42,22 @@ export default class ZipField extends React.Component {
   }
 }
 
-
-
 const style = {
   margin: 12,
 };
+
+
+function mapStateToProps(state) {
+  return {
+    distance: state.distance
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({getDistance: getDistance}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ZipField)
 
 //AIza
 //SyANn
