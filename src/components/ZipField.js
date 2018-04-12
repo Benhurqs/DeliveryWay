@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import InputMask from 'react-input-mask'
 
 export default class ZipField extends React.Component {
 
@@ -25,10 +26,19 @@ export default class ZipField extends React.Component {
           id="zip-field"
           value={this.state.value}
           onChange={this.handleChange}
-          hintText="Preencha com o cep de entrega"
-          
-        />
+          floatingLabelText="Preencha com o cep de entrega"
+          type='number'>
+          <InputMask mask="99999-999" maskChar="" />
+            
+        </TextField>
       </Card>
     );
   }
 }
+//AIza
+//SyANn
+//Fv6A0
+//gzXlYm
+//VVC1BN
+//N018Yu
+//1vlR3lE
