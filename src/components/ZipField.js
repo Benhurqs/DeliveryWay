@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {label} from 'react';
 import TextField from 'material-ui/TextField';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import InputMask from 'react-input-mask'
@@ -15,28 +15,35 @@ class ZipField extends React.Component {
     super(props);
 
     this.state = {
-      // value: 'Property Value',
+       distance: this.props.getDistance('25080150', '22770104'),
+       value: "Testando"
     };
   }
 
   handleChange = (event) => {
+    console.log(this.state.distance);
     this.setState({
-      value: event.target.value,
+       value: "blablba",
     });
   };
 
   render() {
     return (
       <Card>
+        <label for="test">{this.state.value}</label>
         <TextField
           id="zip-field"
-          value={this.state.value}
-          onChange={this.handleChange}
-          floatingLabelText="Preencha com o cep de entrega"
+          floatingLabelText='Preencha o cep para entrega'
+          floatingLabelFixed={true}
           type='number'>
           <InputMask mask="99999-999" maskChar="" />
         </TextField>
-        <RaisedButton label="OK" primary={true} style={style} />
+        
+        <RaisedButton 
+          label="OK" 
+          primary={true}
+          onClick= {this.handleChange}
+          style={style} />
       </Card>
     );
   }
@@ -49,7 +56,7 @@ const style = {
 
 function mapStateToProps(state) {
   return {
-    distance: state.distance
+    distance: state
   };
 }
 
@@ -58,11 +65,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZipField)
-
-//AIza
-//SyANn
-//Fv6A0
-//gzXlYm
-//VVC1BN
-//N018Yu
-//1vlR3lE
