@@ -11,8 +11,6 @@ export default function getDistance(origin, destination) {
   return(dispatch)=>{
     return axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}}&destinations=${destination}&key=AIzaSyANnFv6A0gzXlYmVVC1BNN018Yu1vlR3lE`, headers)
       .then(function (response) {
-
-      console.log("chamada");
         console.log(response);
         dispatch(getStatus(response.data));
       })
