@@ -6,8 +6,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 import {connect} from 'react-redux'
-import getDistance from '../store/googlemaps/actions/action_get_distance'
-import {bindActionCreators} from 'redux'
+// import getDistance from '../store/googlemaps/actions/action_get_distance'
+import { pullDistance } from '../store/googlemaps/actions/action_get_distance'
+// import {bindActionCreators} from 'redux'
 
 class ZipField extends React.Component {
 
@@ -15,7 +16,7 @@ class ZipField extends React.Component {
     super(props);
 
     this.state = {
-       distance: this.props.getDistance('25080150', '22770104'),
+       distance: '',
        value: "Testando"
     };
   }
@@ -26,6 +27,12 @@ class ZipField extends React.Component {
        value: "blablba",
     });
   };
+
+  componentDidMount(){
+      this.props.pullDistance('25080150', '22770104')
+            .then(resp => console.log(resp.distance.data))
+            .catch(err => console.log(err))
+  }
 
   render() {
     return (
@@ -38,9 +45,9 @@ class ZipField extends React.Component {
           type='number'>
           <InputMask mask="99999-999" maskChar="" />
         </TextField>
-        
-        <RaisedButton 
-          label="OK" 
+
+        <RaisedButton
+          label="OK"
           primary={true}
           onClick= {this.handleChange}
           style={style} />
@@ -56,12 +63,20 @@ const style = {
 
 function mapStateToProps(state) {
   return {
-    distance: state
+    distance: state.metrics
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({getDistance: getDistance}, dispatch);
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({getDistance: getDistance}, dispatch);
+// }
+
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        pullDistance: (origin, dist) => dispatch(pullDistance(origin, dist)),
+    }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZipField)
