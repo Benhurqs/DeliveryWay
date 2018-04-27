@@ -14,7 +14,5 @@ const fetcher = axios.create({
 
 
 export function getDistance(origin, destination){
-    console.log(origin)
-    console.log(destination)
     return fetcher.get(`/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=AIzaSyANnFv6A0gzXlYmVVC1BNN018Yu1vlR3lE`)
 }

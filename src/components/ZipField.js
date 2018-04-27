@@ -1,14 +1,12 @@
 import React, {label} from 'react';
 import TextField from 'material-ui/TextField';
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card} from 'material-ui/Card';
 import InputMask from 'react-input-mask'
 import RaisedButton from 'material-ui/RaisedButton';
 
 
 import {connect} from 'react-redux'
-// import getDistance from '../store/googlemaps/actions/action_get_distance'
 import { pullDistance } from '../store/googlemaps/actions/action_get_distance'
-// import {bindActionCreators} from 'redux'
 
 class ZipField extends React.Component {
 
@@ -16,41 +14,62 @@ class ZipField extends React.Component {
     super(props);
 
     this.state = {
-       distance: '',
-       value: "Testando"
+      msg: '',
+       loading: false,
+       zipFieldValue: ''
     };
   }
 
   handleChange = (event) => {
-    console.log(this.state.distance);
-    this.setState({
-       value: "blablba",
-    });
+    this.setState({loading: true })
+    this.props.pullDistance(this.state.zipFieldValue, '22770104')
+            .then(resp => this.setState({msg: resp.msg , loading: false }))
+            .catch(err => this.setState({msg: err , loading: false }))
   };
 
-  componentDidMount(){
-      this.props.pullDistance('25080150', '22770104')
-            .then(resp => console.log(resp.distance.data))
-            .catch(err => console.log(err))
+  componentDidMount(){}
+
+  handleTextFieldChange = (e) => {
+    if(e.target.value.length === 0){
+      this.setState({
+        msg: ''
+    });
+    }
+
+    this.setState({
+        zipFieldValue: e.target.value
+    });
   }
 
   render() {
+    const { loading, zipFieldValue, msg } = this.state;
+    const zipFiledIsFilled = zipFieldValue.length >= 9 ;
+
     return (
       <Card>
-        <label for="test">{this.state.value}</label>
-        <TextField
-          id="zip-field"
-          floatingLabelText='Preencha o cep para entrega'
-          floatingLabelFixed={true}
-          type='number'>
-          <InputMask mask="99999-999" maskChar="" />
-        </TextField>
+        
+        <div>
+          <TextField
+            id="zip-field"
+            floatingLabelText='Preencha o cep para entrega'
+            floatingLabelFixed={true}
+            onChange={this.handleTextFieldChange}
+            type='number'>
+            <InputMask mask="99999-999" maskChar="" />
+          </TextField>
 
-        <RaisedButton
-          label="OK"
-          primary={true}
-          onClick= {this.handleChange}
-          style={style} />
+          <RaisedButton
+            label="OK"
+            primary={true}
+            onClick= {this.handleChange}
+            disabled={!zipFiledIsFilled}
+            style={style} />
+        </div>
+        <div>
+          <label hidden={!loading} >Carregando...</label>
+          <label hidden={loading} >{msg}</label>
+        </div>
+        
       </Card>
     );
   }
@@ -67,16 +86,10 @@ function mapStateToProps(state) {
   };
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({getDistance: getDistance}, dispatch);
-// }
-
-
 const mapDispatchToProps = (dispatch) => {
     return {
         pullDistance: (origin, dist) => dispatch(pullDistance(origin, dist)),
     }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZipField)
