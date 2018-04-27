@@ -9,10 +9,9 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-image: url(http://www.brusselsrestaurant.ca/wp-content/uploads/2017/01/wood.png);
+  /* height: 150px; */
   padding: 20px;
-  color: white;
 }
 
 .App-title {
@@ -21,7 +20,7 @@
 
 .App-intro {
   font-size: large;
-  background-color: #cccccc;
+  background-color: #000;
   height: 100%;
 }
 
