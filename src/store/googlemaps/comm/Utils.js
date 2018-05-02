@@ -32,6 +32,7 @@ export const convertToMsg = (msg, delivery = false, ) => ({
 });
 
 export function managerGoogleResponse(response){
+    console.log(response)
     var status = UNKNOWN_ERROR
     if(response.data.status === "OK"){
         status = response.data.status

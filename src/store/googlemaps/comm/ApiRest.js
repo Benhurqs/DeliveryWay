@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { GOOGLE } from './Consts'
 
 
 const  headers ={
@@ -14,5 +15,5 @@ const fetcher = axios.create({
 
 
 export function getDistance(origin, destination){
-    return fetcher.get(`/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=AIzaSyANnFv6A0gzXlYmVVC1BNN018Yu1vlR3lE`)
+    return fetcher.get(`/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${GOOGLE.KEY}`)
 }

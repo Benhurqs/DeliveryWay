@@ -4,13 +4,14 @@ import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import ZipField from './components/ZipField';
 import GoogleMapReact from 'google-map-react'
+import { GOOGLE } from './store/googlemaps/comm/Consts'
 
 const AnyReactComponent = ({ text }) => <div>{ text }</div>;
 
 class App extends Component {
   static defaultProps = {
     center: { lat: 40.7446790, lng: -73.9485420 },
-    zoom: 11
+    zoom: 15
   }
 
   render() {
@@ -24,7 +25,7 @@ class App extends Component {
             <ZipField/>
             <div className='google-map'>
             <GoogleMapReact
-              bootstrapURLKeys={{ key: "AIzaSyAnFIvVKkyzjXMVdz7_z-jhDuAS2iT-8Ig" }}
+              bootstrapURLKeys={{ key: GOOGLE.KEY }}
               defaultCenter={ this.props.center }
               defaultZoom={ this.props.zoom }>
               <AnyReactComponent
