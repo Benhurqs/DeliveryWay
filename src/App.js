@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import ZipField from './components/ZipField';
+import AddressField from './components/AddressField';
 import GoogleMapReact from 'google-map-react'
 import { GOOGLE } from './store/googlemaps/comm/Consts'
 
@@ -22,7 +22,7 @@ class App extends Component {
             <h1 className="App-title">Delivery Way</h1>
           </header>
           <div className="App-intro">
-            <ZipField/>
+            <AddressField/>
             <div className='google-map'>
             <GoogleMapReact
               bootstrapURLKeys={{ key: GOOGLE.KEY }}
